@@ -1,0 +1,74 @@
+联系我们
+========
+
+JDOS TEAM联系方式（任何联系方法都可以，我们建议的顺序是：电话 > 咚咚 >
+邮件）
+
+邮件组：csp@jd.com
+
+容器引擎平台负责人
+------------------
+
+-  鲍永成 （18551730951，baoyongcheng@jd.com）
+
+项目经理
+--------
+
+-  王美婷 （13809031208，wangmeiting@jd.com）
+
+运维问题优先联系（请先查看下方值班表）
+--------------------------------------
+
+-  郭俊民 （13651043100，guojunmin1@jd.com）
+-  何永成 （13520820794，heyongcheng@jd.com）
+-  魏楠 （13426353870，weinan@jd.com）
+-  秦岭 （15210398533，qinling@jd.com）
+
+容器引擎问题优先联系
+--------------------
+
+-  梁小平 （18602558865，liangxiaoping@jd.com）
+-  张伟伟 （15051810826，njzhangweiwei@jd.com）
+-  张建 （18751954650，zhangjian@jd.com）
+-  王峰 （15850580829，yfwangfeng1@jd.com）
+-  吕江昭 （15851848191，lvjiangzhao@jd.com）
+
+日志告警问题优先联系
+--------------------
+
+-  申慧超 （15365054930，shenhuichao@jd.com）
+
+网络问题优先联系
+----------------
+
+-  杨万里 （13851932876，yangwanli@jd.com）
+-  李国超 （18551712790，liguochao@jd.com）
+-  祁云峰 （15905157803，qiyunfeng1@jd.com）
+-  崔孝飞 （15952037753，cuixiaofei@jd.com）
+-  陈书刚 （15251763072，chenshugang@jd.com）
+-  沈娟 （15150663093，shenjuan@jd.com）
+
+系统问题优先联系
+----------------
+
+-  江凌生 （15295590743，jianglingsheng@jd.com）
+-  王兴刚 （18066060622，wangxinggang@jd.com）
+-  韩建飞 （18602507691，hanjianfei@jd.com）
+-  郑晓川 （18913818108，zhengxiaochuan@jd.com）
+
+MJDOS控制台及监控问题
+---------------------
+
+-  徐震海 （18502531334，xuzhenhai@jd.com）
+-  张伶卫 （18602510656，zhanglingwei@jd.com）
+-  李旦 （13337821341，lidan17@jd.com）
+
+容器引擎控制台
+--------------
+
+-  王曦 （18795939395，njwangxi@jd.com）
+-  徐新坤 （15950522659，xuxinkun@jd.com）
+-  潘磊 （18205186561，panlei5@jd.com）
+-  王思武 （13260796097，wangsiwu@jd.com）
+-  欧阳林霞 （15195915371，ouyanglinxia@jd.com）
+-  张凯 （18795998141，zhangkai12@jd.com）

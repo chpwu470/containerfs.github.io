@@ -1,0 +1,157 @@
+总体架构
+==================
+
+Architecture
+------------
+
+See the later sections for more details of each Containerfs component.
+
+.. figure:: ./_static/img/design/architecture.png
+   :alt:
+
+Volume
+~~~~~~
+
+Volume is a Containerfs instance. One Containerfs cluster can host
+millions of volumes. A volume has one matadata table and unlimited
+number of block groups
+
+Inode
+~~~~~
+
+Inode is a data structure recording the file or directory attributes,
+indexed with a unique 64bit integer.
+
+Matadata Table
+~~~~~~~~~~~~~~
+
+A metadata table is a sorted key-value map from “parent inodeID + name”
+to inode attributes. One volume is associated with a metadata table.
+Metadata tables are replicated via Raft, and not sharded by design.
+
+Block Group
+~~~~~~~~~~~
+
+Fix-sized replicated storage unit of file extents
+
+MetaNode
+~~~~~~~~
+
+Hosts one or multiple metadata tables
+
+DataNode
+~~~~~~~~
+
+Hosts one or multiple block groups
+
+Volume Manager
+~~~~~~~~~~~~~~
+
+VolMgr holds all the cluster-level metadata, like the volume space
+quota, nodes status.
+
+Client
+~~~~~~
+
+FUSE Linux kernel
+
+Communication
+-------------
+
+Core Functions
+--------------
+
+Volume create
+~~~~~~~~~~~~~
+
+open I/O flow
+~~~~~~~~~~~~~
+
+write I/O flow
+~~~~~~~~~~~~~~
+
+read I/O flow
+~~~~~~~~~~~~~
+
+Struct
+------
+
+volume namespace
+~~~~~~~~~~~~~~~~
+
+.. code:: go
+
+    type KvStateMachine struct {
+        id      uint64
+        applied uint64
+        raft    *raft.RaftServer
+
+        dentryItem btree.DentryKV
+        inodeItem  btree.InodeKV
+        bgItem     btree.BGKV
+
+        dentryData     *btree.BTree
+        inodeData      *btree.BTree
+        blockGroupData *btree.BTree
+
+        chunkIDLocker sync.Mutex
+        chunkID       uint64
+
+        inodeIDLocker sync.Mutex
+        inodeID       uint64
+     }
+
+dentry
+~~~~~~
+
+.. code:: go
+
+    type Dirent struct {
+        InodeType bool   `protobuf:"varint,1,opt,name=InodeType" json:"InodeType,omitempty"`
+        Inode     uint64 `protobuf:"varint,2,opt,name=Inode" json:"Inode,omitempty"`
+     }
+
+inode
+~~~~~
+
+.. code:: go
+
+block group
+~~~~~~~~~~~
+
+.. code:: go
+
+    type InodeInfo struct {
+        ModifiTime int64        `protobuf:"varint,1,opt,name=ModifiTime" json:"ModifiTime,omitempty"`
+        AccessTime int64        `protobuf:"varint,2,opt,name=AccessTime" json:"AccessTime,omitempty"`
+        Link       uint32       `protobuf:"varint,3,opt,name=Link" json:"Link,omitempty"`
+        FileSize   int64        `protobuf:"varint,4,opt,name=FileSize" json:"FileSize,omitempty"`
+        Chunks     []*ChunkInfo `protobuf:"bytes,5,rep,name=Chunks" json:"Chunks,omitempty"`
+    }
+
+
+    type BlockGroup struct {
+        BlockGroupID uint32       `protobuf:"varint,1,opt,name=BlockGroupID" json:"BlockGroupID,omitempty"`
+        FreeSize     int64        `protobuf:"varint,2,opt,name=FreeSize" json:"FreeSize,omitempty"`
+        Status       int32        `protobuf:"varint,3,opt,name=Status" json:"Status,omitempty"`
+        BlockInfos   []*BlockInfo `protobuf:"bytes,4,rep,name=BlockInfos" json:"BlockInfos,omitempty"`
+     }
+
+     type BlockInfo struct {
+        BlockID      uint32 `protobuf:"varint,1,opt,name=BlockID" json:"BlockID,omitempty"`
+        DataNodeIP   int32  `protobuf:"varint,2,opt,name=DataNodeIP" json:"DataNodeIP,omitempty"`
+        DataNodePort int32  `protobuf:"varint,3,opt,name=DataNodePort" json:"DataNodePort,omitempty"`
+        Status       int32  `protobuf:"varint,4,opt,name=Status" json:"Status,omitempty"`
+     }
+
+chunk
+~~~~~
+
+.. code:: go
+
+     type ChunkInfo struct {
+        ChunkID      uint64  `protobuf:"varint,1,opt,name=ChunkID" json:"ChunkID,omitempty"`
+        ChunkSize    int32   `protobuf:"varint,2,opt,name=ChunkSize" json:"ChunkSize,omitempty"`
+        BlockGroupID uint32  `protobuf:"varint,3,opt,name=BlockGroupID" json:"BlockGroupID,omitempty"`
+        Status       []int32 `protobuf:"varint,4,rep,packed,name=Status" json:"Status,omitempty"`
+     }

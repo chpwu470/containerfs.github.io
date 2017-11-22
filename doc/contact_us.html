@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>联系我们 &mdash; Containerfs 文档 0.2.4 文档</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+
+
+
+
+
+    <link rel="top" title="Containerfs 文档 0.2.4 文档" href="main.html"/>
+
+    <link rel="icon" href="../static/img/introduce/cfs.ico">
+  <script src="../static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+
+
+            <a href="main.html" class="icon icon-home"> Containerfs 文档
+
+
+
+          </a>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">快速部署</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id2">简介：</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id3">集群搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#id4">0、组件分配：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#metanode">1、在 192.168.100.216 192.168.100.17 192.168.100.19 启动 metanode：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#volume">3、在某台机器，使用命令行工具，创建一个 volume：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#fuse-yum-install-fuse-y-5volume">4、在某客户机，安装 fuse (yum install fuse -y) ,然后挂载步骤5创建的volume：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">总体架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design.html#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume">Volume</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#inode">Inode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#matadata-table">Matadata Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#block-group">Block Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#metanode">MetaNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#datanode">DataNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume-manager">Volume Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#client">Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#communication">Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#core-functions">　Core Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume-create">Volume create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#open-i-o-flow">open I/O flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#write-i-o-flow">write I/O flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#read-i-o-flow">read I/O flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#struct">Struct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume-namespace">volume namespace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#dentry">dentry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#id1">inode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#id2">block group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#chunk">chunk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">产品特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">模块介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-mutiraft">1. metanode - mutiraft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-btree">2. metanode - btree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-namespace">3. metanode - namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#datanode-blockgroup">4. datanode - blockgroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#fuseclient">5. fuseclient</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="function.html">功能介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function.html#volume-opt">1. volume opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function.html#dir-opt">2. dir opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function.html#file-opt">3. file opt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">快问快答</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="main.html">Containerfs 文档</a>
+      </nav>
+
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="main.html">Docs</a> &raquo;</li>
+
+    <li>联系我们</li>
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/contact_us.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="id1">
+<h1>联系我们<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>JDOS TEAM联系方式（任何联系方法都可以，我们建议的顺序是：电话 &gt; 咚咚 &gt;
+邮件）</p>
+<p>邮件组：<a class="reference external" href="mailto:csp&#37;&#52;&#48;jd&#46;com">csp<span>&#64;</span>jd<span>&#46;</span>com</a></p>
+<div class="section" id="id2">
+<h2>容器引擎平台负责人<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>鲍永成 （18551730951，<a class="reference external" href="mailto:baoyongcheng&#37;&#52;&#48;jd&#46;com">baoyongcheng<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>项目经理<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>王美婷 （13809031208，<a class="reference external" href="mailto:wangmeiting&#37;&#52;&#48;jd&#46;com">wangmeiting<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>运维问题优先联系（请先查看下方值班表）<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>郭俊民 （13651043100，<a class="reference external" href="mailto:guojunmin1&#37;&#52;&#48;jd&#46;com">guojunmin1<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>何永成 （13520820794，<a class="reference external" href="mailto:heyongcheng&#37;&#52;&#48;jd&#46;com">heyongcheng<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>魏楠 （13426353870，<a class="reference external" href="mailto:weinan&#37;&#52;&#48;jd&#46;com">weinan<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>秦岭 （15210398533，<a class="reference external" href="mailto:qinling&#37;&#52;&#48;jd&#46;com">qinling<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>容器引擎问题优先联系<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>梁小平 （18602558865，<a class="reference external" href="mailto:liangxiaoping&#37;&#52;&#48;jd&#46;com">liangxiaoping<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>张伟伟 （15051810826，<a class="reference external" href="mailto:njzhangweiwei&#37;&#52;&#48;jd&#46;com">njzhangweiwei<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>张建 （18751954650，<a class="reference external" href="mailto:zhangjian&#37;&#52;&#48;jd&#46;com">zhangjian<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>王峰 （15850580829，<a class="reference external" href="mailto:yfwangfeng1&#37;&#52;&#48;jd&#46;com">yfwangfeng1<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>吕江昭 （15851848191，<a class="reference external" href="mailto:lvjiangzhao&#37;&#52;&#48;jd&#46;com">lvjiangzhao<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>日志告警问题优先联系<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>申慧超 （15365054930，<a class="reference external" href="mailto:shenhuichao&#37;&#52;&#48;jd&#46;com">shenhuichao<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>网络问题优先联系<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>杨万里 （13851932876，<a class="reference external" href="mailto:yangwanli&#37;&#52;&#48;jd&#46;com">yangwanli<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>李国超 （18551712790，<a class="reference external" href="mailto:liguochao&#37;&#52;&#48;jd&#46;com">liguochao<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>祁云峰 （15905157803，<a class="reference external" href="mailto:qiyunfeng1&#37;&#52;&#48;jd&#46;com">qiyunfeng1<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>崔孝飞 （15952037753，<a class="reference external" href="mailto:cuixiaofei&#37;&#52;&#48;jd&#46;com">cuixiaofei<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>陈书刚 （15251763072，<a class="reference external" href="mailto:chenshugang&#37;&#52;&#48;jd&#46;com">chenshugang<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>沈娟 （15150663093，<a class="reference external" href="mailto:shenjuan&#37;&#52;&#48;jd&#46;com">shenjuan<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2>系统问题优先联系<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>江凌生 （15295590743，<a class="reference external" href="mailto:jianglingsheng&#37;&#52;&#48;jd&#46;com">jianglingsheng<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>王兴刚 （18066060622，<a class="reference external" href="mailto:wangxinggang&#37;&#52;&#48;jd&#46;com">wangxinggang<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>韩建飞 （18602507691，<a class="reference external" href="mailto:hanjianfei&#37;&#52;&#48;jd&#46;com">hanjianfei<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>郑晓川 （18913818108，<a class="reference external" href="mailto:zhengxiaochuan&#37;&#52;&#48;jd&#46;com">zhengxiaochuan<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="mjdos">
+<h2>MJDOS控制台及监控问题<a class="headerlink" href="#mjdos" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>徐震海 （18502531334，<a class="reference external" href="mailto:xuzhenhai&#37;&#52;&#48;jd&#46;com">xuzhenhai<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>张伶卫 （18602510656，<a class="reference external" href="mailto:zhanglingwei&#37;&#52;&#48;jd&#46;com">zhanglingwei<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>李旦 （13337821341，<a class="reference external" href="mailto:lidan17&#37;&#52;&#48;jd&#46;com">lidan17<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>容器引擎控制台<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li>王曦 （18795939395，<a class="reference external" href="mailto:njwangxi&#37;&#52;&#48;jd&#46;com">njwangxi<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>徐新坤 （15950522659，<a class="reference external" href="mailto:xuxinkun&#37;&#52;&#48;jd&#46;com">xuxinkun<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>潘磊 （18205186561，<a class="reference external" href="mailto:panlei5&#37;&#52;&#48;jd&#46;com">panlei5<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>王思武 （13260796097，<a class="reference external" href="mailto:wangsiwu&#37;&#52;&#48;jd&#46;com">wangsiwu<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>欧阳林霞 （15195915371，<a class="reference external" href="mailto:ouyanglinxia&#37;&#52;&#48;jd&#46;com">ouyanglinxia<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+<li>张凯 （18795998141，<a class="reference external" href="mailto:zhangkai12&#37;&#52;&#48;jd&#46;com">zhangkai12<span>&#64;</span>jd<span>&#46;</span>com</a>）</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; 版权所有 2013-2017, JDOS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../static/jquery.js"></script>
+      <script type="text/javascript" src="../static/underscore.js"></script>
+      <script type="text/javascript" src="../static/doctools.js"></script>
+      <script type="text/javascript" src="../static/translations.js"></script>
+
+
+
+
+
+    <script type="text/javascript" src="../static/js/theme.js"></script>
+
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+
+
+</body>
+</html>
