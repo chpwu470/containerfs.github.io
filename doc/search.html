@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>搜索 &mdash; Containerfs 文档 0.2.4 文档</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+
+
+
+
+
+    <link rel="top" title="Containerfs 文档 0.2.4 文档" href="main.html"/>
+
+    <link rel="icon" href="../static/img/introduce/cfs.ico">
+  <script src="../static/js/libs/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+
+
+            <a href="main.html" class="icon icon-home"> Containerfs 文档
+
+
+
+          </a>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">快速部署</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id2">简介：</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id3">集群搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#id4">0、组件分配：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#metanode">1、在 192.168.100.216 192.168.100.17 192.168.100.19 启动 metanode：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#volume">3、在某台机器，使用命令行工具，创建一个 volume：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#fuse-yum-install-fuse-y-5volume">4、在某客户机，安装 fuse (yum install fuse -y) ,然后挂载步骤5创建的volume：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">总体架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="design.html#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume">Volume</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#inode">Inode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#matadata-table">Matadata Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#block-group">Block Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#metanode">MetaNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#datanode">DataNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume-manager">Volume Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#client">Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#communication">Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#core-functions">Core Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume-create">Volume create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#open-i-o-flow">open I/O flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#write-i-o-flow">write I/O flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#read-i-o-flow">read I/O flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="design.html#struct">Struct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="design.html#volume-namespace">volume namespace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#dentry">dentry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#id1">inode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#id2">block group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="design.html#chunk">chunk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">产品特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">模块介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-mutiraft">1. metanode - mutiraft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-btree">2. metanode - btree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-namespace">3. metanode - namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#datanode-blockgroup">4. datanode - blockgroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#fuseclient">5. fuseclient</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="function.html">功能介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function.html#volume-opt">1. volume opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function.html#dir-opt">2. dir opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function.html#file-opt">3. file opt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">快问快答</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="main.html">Containerfs 文档</a>
+      </nav>
+
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="main.html">Docs</a> &raquo;</li>
+
+    <li></li>
+      <li class="wy-breadcrumbs-aside">
+
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <noscript>
+  <div id="fallback" class="admonition warning">
+    <p class="last">
+      Please activate JavaScript to enable the search
+      functionality.
+    </p>
+  </div>
+  </noscript>
+
+
+  <div id="search-results">
+
+  </div>
+
+           </div>
+          </div>
+          <footer>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; 版权所有 2013-2017, JDOS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../static/js/libs/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="../static/js/libs/underscore.js"></script>
+      <script type="text/javascript" src="../static/js/libs/doctools.js"></script>
+      <script type="text/javascript" src="../static/js/libs/translations.js"></script>
+      <script type="text/javascript" src="../static/js/libs/searchtools.js"></script>
+
+
+
+
+
+    <script type="text/javascript" src="../static/js/libs/theme.js"></script>
+
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("searchindex.js"); });
+  </script>
+
+  <script type="text/javascript" id="searchindexloader"></script>
+
+
+
+</body>
+</html>

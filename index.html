@@ -92,7 +92,7 @@
                 <div class="col-xs-5 text">
                     <h2>ContainerFS核心概念</h2>
                     <p>
-                        ContainerFS的核心概念是：a volume = a metadata table + multiple block groups。系统分为4块，包括metanode datanode volmgr client。每个volume有一个自己的namespace，包括1个元数据表和多个BlockGroup。metanode的高可用和持久化是通过京东基础架构部出品的muti-raft复制协议保证。
+                        ContainerFS的核心概念是：a volume = a metadata table + multiple block groups。系统分为4块，包括metanode datanode fuseClient kernelClient。每个volume有一个自己的namespace，包括1个元数据表和多个BlockGroup。metanode的高可用和持久化是通过京东基础架构部出品的muti-raft复制协议保证。
                     </p>
                     <!--<a class="btn" href="http://console.cfs.jd.com">立即体验</a>-->
                 </div>
@@ -141,11 +141,11 @@
                     <img src="static/img/introduce/console.png" width="100%" alt="">
                 </div>
                 <div class="col-xs-5 text text-right">
-                    <h2>ContainerFS管理系统</h2>
+                    <h2>ContainerFS帮助文档</h2>
                     <p>
-                        当前管理系统提供数据概览功能，操作管理界面分为集群管理、元数据节点管理、数据节点管理、Volume管理功能，方便定位排查。
+                        针对当前推出的管理系统，帮助文档从快速部署、总体架构、模块介绍、功能介绍等多方面提供详细指导。
                     </p>
-                    <a class="btn pull-right" target="_blank" href="http://docs-lddocs2.cfsdoc.svc.gz.n.jd.local/containerfs/">了解更多</a>
+                    <a class="btn pull-right" target="_blank" href="./doc/main.html">了解更多</a>
                 </div>
             </div>
         </div>

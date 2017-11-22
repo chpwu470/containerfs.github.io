@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>总体架构 &mdash; Containerfs 文档 0.2.4 文档</title>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="../static/css/theme.css" type="text/css" />
+
+
+
+
+
+    <link rel="top" title="Containerfs 文档 0.2.4 文档" href="main.html"/>
+        <link rel="next" title="产品特性" href="feature.html"/>
+        <link rel="prev" title="快速部署" href="setup.html"/>
+
+    <link rel="icon" href="../static/img/introduce/cfs.ico">
+  <script src="../static/js/libs/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+
+
+
+            <a href="main.html" class="icon icon-home"> Containerfs 文档
+
+
+
+          </a>
+
+
+
+
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+
+
+
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup.html">快速部署</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id2">简介：</a></li>
+<li class="toctree-l2"><a class="reference internal" href="setup.html#id3">集群搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#id4">0、组件分配：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#metanode">1、在 192.168.100.216 192.168.100.17 192.168.100.19 启动 metanode：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#volume">3、在某台机器，使用命令行工具，创建一个 volume：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setup.html#fuse-yum-install-fuse-y-5volume">4、在某客户机，安装 fuse (yum install fuse -y) ,然后挂载步骤5创建的volume：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">总体架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#architecture">Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#volume">Volume</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inode">Inode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matadata-table">Matadata Table</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#block-group">Block Group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#metanode">MetaNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#datanode">DataNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#volume-manager">Volume Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#client">Client</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#communication">Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#core-functions">Core Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#volume-create">Volume create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-i-o-flow">open I/O flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#write-i-o-flow">write I/O flow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-i-o-flow">read I/O flow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#struct">Struct</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#volume-namespace">volume namespace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dentry">dentry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">inode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">block group</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chunk">chunk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">产品特性</a></li>
+<li class="toctree-l1"><a class="reference internal" href="module.html">模块介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-mutiraft">1. metanode - mutiraft</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-btree">2. metanode - btree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#metanode-namespace">3. metanode - namespace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#datanode-blockgroup">4. datanode - blockgroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="module.html#fuseclient">5. fuseclient</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="function.html">功能介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="function.html#volume-opt">1. volume opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function.html#dir-opt">2. dir opt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function.html#file-opt">3. file opt</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">快问快答</a></li>
+</ul>
+
+
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="main.html">Containerfs 文档</a>
+      </nav>
+
+
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="main.html">Docs</a> &raquo;</li>
+
+    <li>总体架构</li>
+      <li class="wy-breadcrumbs-aside">
+
+
+            <a href="_sources/design.txt" rel="nofollow"> View page source</a>
+
+
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+
+  <div class="section" id="containerfs-design">
+<h1>总体架构<a class="headerlink" href="#containerfs-design" title="永久链接至标题">¶</a></h1>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="永久链接至标题">¶</a></h2>
+<p>See the later sections for more details of each Containerfs component.</p>
+<div class="figure">
+<img alt="" src="../static/img/doc/architecture.png" />
+</div>
+<div class="section" id="volume">
+<h3>Volume<a class="headerlink" href="#volume" title="永久链接至标题">¶</a></h3>
+<p>Volume is a Containerfs instance. One Containerfs cluster can host
+millions of volumes. A volume has one matadata table and unlimited
+number of block groups</p>
+</div>
+<div class="section" id="inode">
+<h3>Inode<a class="headerlink" href="#inode" title="永久链接至标题">¶</a></h3>
+<p>Inode is a data structure recording the file or directory attributes,
+indexed with a unique 64bit integer.</p>
+</div>
+<div class="section" id="matadata-table">
+<h3>Matadata Table<a class="headerlink" href="#matadata-table" title="永久链接至标题">¶</a></h3>
+<p>A metadata table is a sorted key-value map from “parent inodeID + name”
+to inode attributes. One volume is associated with a metadata table.
+Metadata tables are replicated via Raft, and not sharded by design.</p>
+</div>
+<div class="section" id="block-group">
+<h3>Block Group<a class="headerlink" href="#block-group" title="永久链接至标题">¶</a></h3>
+<p>Fix-sized replicated storage unit of file extents</p>
+</div>
+<div class="section" id="metanode">
+<h3>MetaNode<a class="headerlink" href="#metanode" title="永久链接至标题">¶</a></h3>
+<p>Hosts one or multiple metadata tables</p>
+</div>
+<div class="section" id="datanode">
+<h3>DataNode<a class="headerlink" href="#datanode" title="永久链接至标题">¶</a></h3>
+<p>Hosts one or multiple block groups</p>
+</div>
+<div class="section" id="volume-manager">
+<h3>Volume Manager<a class="headerlink" href="#volume-manager" title="永久链接至标题">¶</a></h3>
+<p>VolMgr holds all the cluster-level metadata, like the volume space
+quota, nodes status.</p>
+</div>
+<div class="section" id="client">
+<h3>Client<a class="headerlink" href="#client" title="永久链接至标题">¶</a></h3>
+<p>FUSE Linux kernel</p>
+</div>
+</div>
+<div class="section" id="communication">
+<h2>Communication<a class="headerlink" href="#communication" title="永久链接至标题">¶</a></h2>
+</div>
+<div class="section" id="core-functions">
+<h2>Core Functions<a class="headerlink" href="#core-functions" title="永久链接至标题">¶</a></h2>
+<div class="section" id="volume-create">
+<h3>Volume create<a class="headerlink" href="#volume-create" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="open-i-o-flow">
+<h3>open I/O flow<a class="headerlink" href="#open-i-o-flow" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="write-i-o-flow">
+<h3>write I/O flow<a class="headerlink" href="#write-i-o-flow" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="read-i-o-flow">
+<h3>read I/O flow<a class="headerlink" href="#read-i-o-flow" title="永久链接至标题">¶</a></h3>
+</div>
+</div>
+<div class="section" id="struct">
+<h2>Struct<a class="headerlink" href="#struct" title="永久链接至标题">¶</a></h2>
+<div class="section" id="volume-namespace">
+<h3>volume namespace<a class="headerlink" href="#volume-namespace" title="永久链接至标题">¶</a></h3>
+<div class="code go highlight-python"><div class="highlight"><pre><span></span>type KvStateMachine struct {
+    id      uint64
+    applied uint64
+    raft    *raft.RaftServer
+
+    dentryItem btree.DentryKV
+    inodeItem  btree.InodeKV
+    bgItem     btree.BGKV
+
+    dentryData     *btree.BTree
+    inodeData      *btree.BTree
+    blockGroupData *btree.BTree
+
+    chunkIDLocker sync.Mutex
+    chunkID       uint64
+
+    inodeIDLocker sync.Mutex
+    inodeID       uint64
+ }
+</pre></div>
+</div>
+</div>
+<div class="section" id="dentry">
+<h3>dentry<a class="headerlink" href="#dentry" title="永久链接至标题">¶</a></h3>
+<div class="code go highlight-python"><div class="highlight"><pre><span></span>type Dirent struct {
+    InodeType bool   `protobuf:&quot;varint,1,opt,name=InodeType&quot; json:&quot;InodeType,omitempty&quot;`
+    Inode     uint64 `protobuf:&quot;varint,2,opt,name=Inode&quot; json:&quot;Inode,omitempty&quot;`
+ }
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>inode<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id2">
+<h3>block group<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<div class="code go highlight-python"><div class="highlight"><pre><span></span>type InodeInfo struct {
+    ModifiTime int64        `protobuf:&quot;varint,1,opt,name=ModifiTime&quot; json:&quot;ModifiTime,omitempty&quot;`
+    AccessTime int64        `protobuf:&quot;varint,2,opt,name=AccessTime&quot; json:&quot;AccessTime,omitempty&quot;`
+    Link       uint32       `protobuf:&quot;varint,3,opt,name=Link&quot; json:&quot;Link,omitempty&quot;`
+    FileSize   int64        `protobuf:&quot;varint,4,opt,name=FileSize&quot; json:&quot;FileSize,omitempty&quot;`
+    Chunks     []*ChunkInfo `protobuf:&quot;bytes,5,rep,name=Chunks&quot; json:&quot;Chunks,omitempty&quot;`
+}
+
+
+type BlockGroup struct {
+    BlockGroupID uint32       `protobuf:&quot;varint,1,opt,name=BlockGroupID&quot; json:&quot;BlockGroupID,omitempty&quot;`
+    FreeSize     int64        `protobuf:&quot;varint,2,opt,name=FreeSize&quot; json:&quot;FreeSize,omitempty&quot;`
+    Status       int32        `protobuf:&quot;varint,3,opt,name=Status&quot; json:&quot;Status,omitempty&quot;`
+    BlockInfos   []*BlockInfo `protobuf:&quot;bytes,4,rep,name=BlockInfos&quot; json:&quot;BlockInfos,omitempty&quot;`
+ }
+
+ type BlockInfo struct {
+    BlockID      uint32 `protobuf:&quot;varint,1,opt,name=BlockID&quot; json:&quot;BlockID,omitempty&quot;`
+    DataNodeIP   int32  `protobuf:&quot;varint,2,opt,name=DataNodeIP&quot; json:&quot;DataNodeIP,omitempty&quot;`
+    DataNodePort int32  `protobuf:&quot;varint,3,opt,name=DataNodePort&quot; json:&quot;DataNodePort,omitempty&quot;`
+    Status       int32  `protobuf:&quot;varint,4,opt,name=Status&quot; json:&quot;Status,omitempty&quot;`
+ }
+</pre></div>
+</div>
+</div>
+<div class="section" id="chunk">
+<h3>chunk<a class="headerlink" href="#chunk" title="永久链接至标题">¶</a></h3>
+<div class="code go highlight-python"><div class="highlight"><pre><span></span>type ChunkInfo struct {
+   ChunkID      uint64  `protobuf:&quot;varint,1,opt,name=ChunkID&quot; json:&quot;ChunkID,omitempty&quot;`
+   ChunkSize    int32   `protobuf:&quot;varint,2,opt,name=ChunkSize&quot; json:&quot;ChunkSize,omitempty&quot;`
+   BlockGroupID uint32  `protobuf:&quot;varint,3,opt,name=BlockGroupID&quot; json:&quot;BlockGroupID,omitempty&quot;`
+   Status       []int32 `protobuf:&quot;varint,4,rep,packed,name=Status&quot; json:&quot;Status,omitempty&quot;`
+}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+
+        <a href="feature.html" class="btn btn-neutral float-right" title="产品特性" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+
+
+        <a href="setup.html" class="btn btn-neutral" title="快速部署" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+
+    </div>
+
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; 版权所有 2013-2017, JDOS.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.2.4',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../static/js/libs/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="../static/js/libs/underscore.js"></script>
+      <script type="text/javascript" src="../static/js/libs/doctools.js"></script>
+      <script type="text/javascript" src="../static/js/libs/translations.js"></script>
+
+
+
+
+
+    <script type="text/javascript" src="../static/js/libs/theme.js"></script>
+
+
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+
+
+</body>
+</html>
